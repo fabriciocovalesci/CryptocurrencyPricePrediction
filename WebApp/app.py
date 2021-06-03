@@ -33,16 +33,14 @@ def predict():
         'BNB': 'binance-coin'
     }
 
-    crypto = dict_crypto.get(request.form['cripto'])
     query = f"?fsym={request.form['cripto']}&tsym=USD&limit=1"
     res = requests.get(endpoint + query)
-    print(res.content)
 
-    api_gecko = CoinGeckoAPI()
-    price = api_gecko.get_price(ids=crypto, vs_currencies='usd', include_24hr_vol='true')
-    chart_data = api_gecko.get_coin_ohlc_by_id(id=crypto, vs_currency='usd', days=1)
+    resp = json.loads(res.content)
 
-    return render_template('index.html', data=res.content)
+    print(resp['Data'])
+
+    return render_template('index.html', data=resp['Data'])
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5500))
