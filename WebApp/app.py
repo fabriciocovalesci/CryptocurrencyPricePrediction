@@ -1,7 +1,5 @@
 from flask import Flask, url_for, render_template, request
 import requests
-from pycoingecko import CoinGeckoAPI
-import pandas as pd
 import json
 from datetime import datetime
 import os
